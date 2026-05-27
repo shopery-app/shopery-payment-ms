@@ -12,3 +12,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+feign:
+  client:
+    config:
+      order-ms:
+        url: ${ORDER_MS:http://localhost:8087}

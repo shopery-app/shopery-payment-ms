@@ -12,3 +12,9 @@ spring:
     properties:
       hibernate:
         format_sql: false
+
+feign:
+  client:
+    config:
+      order-ms:
+        url: ${ORDER_MS}
