@@ -1,5 +1,6 @@
 package az.shopery.payment_ms.service.impl;
 
+import az.shopery.payment_ms.client.OrderClient;
 import az.shopery.payment_ms.handler.exception.ApplicationException;
 import az.shopery.payment_ms.handler.exception.ResourceNotFoundException;
 import az.shopery.payment_ms.model.dto.response.StripeCheckoutResponseDto;
@@ -11,7 +12,6 @@ import az.shopery.payment_ms.model.entity.UserEntity;
 import az.shopery.payment_ms.repository.CartRepository;
 import az.shopery.payment_ms.repository.UserAddressRepository;
 import az.shopery.payment_ms.repository.UserRepository;
-import az.shopery.payment_ms.service.OrderService;
 import az.shopery.payment_ms.service.PaymentService;
 import az.shopery.payment_ms.utils.enums.UserStatus;
 import com.stripe.exception.EventDataObjectDeserializationException;
@@ -40,7 +40,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final UserAddressRepository userAddressRepository;
-    private final OrderService orderService;
+    private final OrderClient orderClient;
 
     @Value("${stripe.success-url}")
     private String successUrl;
@@ -181,7 +181,7 @@ public class PaymentServiceImpl implements PaymentService {
             log.info("Creating order for userEmail={}, sessionId={}", userEmail, sessionId);
 
             try {
-                orderService.checkoutFromCart(userEmail);
+                orderClient.checkout(userEmail);
                 log.info("Order(s) created successfully. sessionId={}, user={}", sessionId, userEmail);
             } catch (ApplicationException e) {
                 log.warn("Order creation skipped for sessionId={}, user={}: {}", sessionId, userEmail, e.getMessage());
