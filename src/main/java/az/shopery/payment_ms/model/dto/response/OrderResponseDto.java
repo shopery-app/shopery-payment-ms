@@ -1,18 +1,21 @@
 package az.shopery.payment_ms.model.dto.response;
 
-import az.shopery.utils.enums.OrderStatus;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
+import az.shopery.payment_ms.utils.enums.OrderStatus;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderResponseDto {
     UUID id;

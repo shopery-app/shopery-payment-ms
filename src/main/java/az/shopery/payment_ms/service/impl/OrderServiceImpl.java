@@ -12,7 +12,6 @@ import az.shopery.payment_ms.repository.*;
 import az.shopery.payment_ms.service.OrderService;
 import az.shopery.payment_ms.utils.enums.NotificationType;
 import az.shopery.payment_ms.utils.enums.OrderStatus;
-import az.shopery.payment_ms.utils.enums.UserStatus;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -151,16 +150,6 @@ public class OrderServiceImpl implements OrderService {
 
         log.info("Created {} order(s) for user {} from cart.", dtos.size(), userEmail);
         return SuccessResponse.of(dtos, "Order(s) placed successfully.");
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public SuccessResponse<List<OrderResponseDto>> getMyOrders(String userEmail) {
-        UserEntity user = userRepository.findByEmailAndStatus(userEmail, UserStatus.ACTIVE)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + userEmail));
-        List<OrderEntity> orders = orderRepository.findAllByUserOrderByCreatedAtDesc(user);
-        List<OrderResponseDto> dtos = orders.stream().map(this::map).toList();
-        return SuccessResponse.of(dtos, "Orders retrieved successfully.");
     }
 
     private OrderResponseDto map(OrderEntity order) {
