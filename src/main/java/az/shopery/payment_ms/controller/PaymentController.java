@@ -15,7 +15,7 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     @PostMapping("/stripe/checkout")
-    public ResponseEntity<SuccessResponse<StripeCheckoutResponseDto>> createCheckoutSession(String email) {
+    public ResponseEntity<SuccessResponse<StripeCheckoutResponseDto>> createCheckoutSession(@RequestParam String email) {
         return ResponseEntity.ok(paymentService.createCheckoutSession(email));
     }
 
