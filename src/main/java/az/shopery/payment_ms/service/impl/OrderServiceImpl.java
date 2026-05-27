@@ -64,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
             if (product.getStockQuantity() < item.getQuantity()) {
                 throw new ApplicationException("Not enough stock for product: " + product.getProductName());
             }
-            itemsByShop.computeIfAbsent(product.getShop(), s -> new ArrayList<>()).add(item);
+            itemsByShop.computeIfAbsent(product.getShop(), _ -> new ArrayList<>()).add(item);
         }
 
         List<OrderEntity> createdOrders = new ArrayList<>();
