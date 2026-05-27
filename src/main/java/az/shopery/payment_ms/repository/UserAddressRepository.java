@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserAddressRepository extends JpaRepository<UserAddressEntity, UUID> {
     List<UserAddressEntity> findAllByUserId(UUID userId);
-    boolean existsByUserIdAndIsDefaultTrue(UUID userId);
 }
