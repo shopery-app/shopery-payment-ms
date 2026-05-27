@@ -1,3 +1,20 @@
 spring:
   application:
     name: payment-ms
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+stripe:
+  secret-key: ${STRIPE_SECRET_KEY}
+  webhook-secret: ${STRIPE_WEBHOOK_SECRET}
+  success-url: ${FRONTEND_BASE_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}
+  cancel-url: ${FRONTEND_BASE_URL}/cart
