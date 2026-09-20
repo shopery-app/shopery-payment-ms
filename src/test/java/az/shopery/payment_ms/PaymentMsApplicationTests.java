@@ -9,5 +9,4 @@ class PaymentMsApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
