@@ -101,7 +101,7 @@ public class PaymentServiceImpl implements PaymentService {
 
             SessionCreateParams params = SessionCreateParams.builder()
                     .setMode(SessionCreateParams.Mode.PAYMENT)
-                    .setSuccessUrl(successUrl + "?session_id={CHECKOUT_SESSION_ID}")
+                    .setSuccessUrl(successUrl)
                     .setCancelUrl(cancelUrl)
                     .setClientReferenceId(user.getId().toString())
                     .putMetadata("userEmail", userEmail)
